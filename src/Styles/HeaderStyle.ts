@@ -41,6 +41,15 @@ export const logoVariants = {
   },
 };
 
+export const navVariants = {
+  top: {
+    backgroundColor: "rgba(0, 0, 0, 0)",
+  },
+  scroll: {
+    backgroundColor: "rgba(0, 0, 0, 1)",
+  },
+};
+
 export const Items = styled.ul`
   display: flex;
   align-items: center;

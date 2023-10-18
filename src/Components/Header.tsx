@@ -29,20 +29,13 @@ function Header() {
   };
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 80) {
-      navAnimation.start({
-        backgroundColor: "rgba(0, 0, 0, 1)",
-      });
+      navAnimation.start("scroll");
     } else {
-      navAnimation.start({
-        backgroundColor: "rgba(0, 0, 0, 0)",
-      });
+      navAnimation.start("top");
     }
   });
   return (
-    <S.Nav
-      animate={navAnimation}
-      initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-    >
+    <S.Nav variants={S.navVariants} animate={navAnimation} initial={"top"}>
       <S.Col>
         <S.Logo
           variants={S.logoVariants}
