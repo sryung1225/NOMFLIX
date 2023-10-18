@@ -34,10 +34,9 @@ footer, header, hgroup, main, menu, nav, section {
   display: none;
 }
 body {
-  height: 3000px; // scrollY 확인용 임시 높이 부여
   font-weight: 400;
   font-family: 'Noto Sans KR', sans-serif;
-  color: black;
+  color: ${(props) => props.theme.white.darker};
   line-height: 1.2;
 }
 ol, ul {
