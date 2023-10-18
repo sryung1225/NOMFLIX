@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Nav = styled.nav`
+export const Nav = styled(motion.nav)`
   position: fixed;
   top: 0;
   display: flex;
@@ -9,7 +9,6 @@ export const Nav = styled.nav`
   align-items: center;
   width: 100%;
   padding: 20px 60px;
-  background-color: #000;
   font-size: 14px;
   color: white;
 `;
