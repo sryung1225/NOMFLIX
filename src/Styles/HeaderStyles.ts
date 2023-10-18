@@ -1,15 +1,16 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   width: 100%;
-  top: 0;
-  background-color: black;
-  font-size: 14px;
   padding: 20px 60px;
+  background-color: #000;
+  font-size: 14px;
   color: white;
 `;
 
@@ -18,7 +19,7 @@ export const Col = styled.div`
   align-items: center;
 `;
 
-export const Logo = styled.svg`
+export const Logo = styled(motion.svg)`
   margin-right: 50px;
   width: 95px;
   height: 25px;
@@ -28,6 +29,18 @@ export const Logo = styled.svg`
     stroke: white;
   }
 `;
+
+export const logoVariants = {
+  normal: {
+    fillOpacity: 1,
+  },
+  active: {
+    fillOpacity: [0, 1, 0],
+    transition: {
+      repeat: Infinity,
+    },
+  },
+};
 
 export const Items = styled.ul`
   display: flex;
