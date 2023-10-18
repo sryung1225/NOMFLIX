@@ -1,13 +1,27 @@
 import { useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import * as S from "../Styles/HeaderStyles";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const homeMatch = useMatch("/");
   const tvMatch = useMatch("tv");
-  const openSearch = () => setSearchOpen((prev) => !prev);
+  const inputAnimation = useAnimation();
+  const toggleSearch = () => {
+    if (searchOpen) {
+      // trigger the close animation
+      inputAnimation.start({
+        scaleX: 0,
+      });
+    } else {
+      // trigger the open animation
+      inputAnimation.start({
+        scaleX: 1,
+      });
+    }
+    setSearchOpen((prev) => !prev);
+  };
   return (
     <S.Nav>
       <S.Col>
@@ -36,7 +50,7 @@ function Header() {
       <S.Col>
         <S.Search>
           <motion.svg
-            onClick={openSearch}
+            onClick={toggleSearch}
             animate={{ x: searchOpen ? -180 : 0 }}
             transition={{ type: "linear" }}
             fill="currentColor"
@@ -50,8 +64,9 @@ function Header() {
             ></path>
           </motion.svg>
           <S.Input
+            animate={inputAnimation}
+            initial={{ scaleX: 0 }}
             transition={{ type: "linear" }}
-            animate={{ scaleX: searchOpen ? 1 : 0 }}
             placeholder="제목, 사람, 장르"
           />
         </S.Search>
