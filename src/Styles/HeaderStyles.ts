@@ -73,8 +73,24 @@ export const Circle = styled(motion.span)`
 `;
 
 export const Search = styled.span`
+  position: relative;
+  display: flex;
+  align-items: center;
   color: white;
   svg {
     height: 25px;
+    cursor: pointer;
   }
+`;
+
+export const Input = styled(motion.input)`
+  position: absolute;
+  right: 0;
+  z-index: -1;
+  padding: 8px 0 8px 40px;
+  background-color: transparent;
+  border: 1px solid ${(props) => props.theme.white.lighter};
+  transform-origin: right center;
+  color: white;
+  font-size: 16px;
 `;

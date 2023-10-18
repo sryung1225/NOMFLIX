@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import * as S from "../Styles/HeaderStyles";
 import { motion } from "framer-motion";
 
 function Header() {
+  const [searchOpen, setSearchOpen] = useState(false);
   const homeMatch = useMatch("/");
   const tvMatch = useMatch("tv");
+  const openSearch = () => setSearchOpen((prev) => !prev);
   return (
     <S.Nav>
       <S.Col>
@@ -21,20 +24,21 @@ function Header() {
         </S.Logo>
         <S.Items>
           <S.Item>
-            <Link to="/">
-              Home{homeMatch && <S.Circle layoutId="circle" />}
-            </Link>
+            <Link to="/">홈{homeMatch && <S.Circle layoutId="circle" />}</Link>
           </S.Item>
           <S.Item>
             <Link to="/tv">
-              Tv Shows{tvMatch && <S.Circle layoutId="circle" />}
+              시리즈{tvMatch && <S.Circle layoutId="circle" />}
             </Link>
           </S.Item>
         </S.Items>
       </S.Col>
       <S.Col>
         <S.Search>
-          <svg
+          <motion.svg
+            onClick={openSearch}
+            animate={{ x: searchOpen ? -180 : 0 }}
+            transition={{ type: "linear" }}
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +48,12 @@ function Header() {
               d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
               clipRule="evenodd"
             ></path>
-          </svg>
+          </motion.svg>
+          <S.Input
+            transition={{ type: "linear" }}
+            animate={{ scaleX: searchOpen ? 1 : 0 }}
+            placeholder="제목, 사람, 장르"
+          />
         </S.Search>
       </S.Col>
     </S.Nav>
