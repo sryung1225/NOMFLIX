@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import * as S from "../Styles/HeaderStyle";
-import { motion, useAnimation } from "framer-motion";
+import {
+  motion,
+  useAnimation,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const homeMatch = useMatch("/");
   const tvMatch = useMatch("tv");
   const inputAnimation = useAnimation();
+  const { scrollY } = useScroll();
   const toggleSearch = () => {
     if (searchOpen) {
       inputAnimation.start({
@@ -20,6 +26,9 @@ function Header() {
     }
     setSearchOpen((prev) => !prev);
   };
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    console.log(latest);
+  });
   return (
     <S.Nav>
       <S.Col>
