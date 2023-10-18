@@ -48,12 +48,28 @@ export const Items = styled.ul`
 `;
 
 export const Item = styled.li`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-right: 20px;
   color: ${(props) => props.theme.white.darker};
   transition: color 0.3s ease-in-out;
   &:hover {
     color: ${(props) => props.theme.white.lighter};
   }
+`;
+
+export const Circle = styled(motion.span)`
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: ${(props) => props.theme.red};
 `;
 
 export const Search = styled.span`
