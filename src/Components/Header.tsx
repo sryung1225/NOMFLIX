@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useMatch } from "react-router-dom";
-import * as S from "../Styles/HeaderStyles";
+import * as S from "../Styles/HeaderStyle";
 import { motion, useAnimation } from "framer-motion";
 
 function Header() {
