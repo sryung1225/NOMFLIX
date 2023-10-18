@@ -10,12 +10,10 @@ function Header() {
   const inputAnimation = useAnimation();
   const toggleSearch = () => {
     if (searchOpen) {
-      // trigger the close animation
       inputAnimation.start({
         scaleX: 0,
       });
     } else {
-      // trigger the open animation
       inputAnimation.start({
         scaleX: 1,
       });
@@ -64,6 +62,7 @@ function Header() {
             ></path>
           </motion.svg>
           <S.Input
+            name="searchKeyword"
             animate={inputAnimation}
             initial={{ scaleX: 0 }}
             transition={{ type: "linear" }}
