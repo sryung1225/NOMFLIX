@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { IGetMoviesResult, getMovies } from "../api";
 import * as S from "../Styles/HomeStyle";
 import { makeImagePath } from "../utils";
+import Slider from "../Components/Slider";
 
 function Home() {
   const { data, isLoading } = useQuery<IGetMoviesResult>(
@@ -20,6 +21,7 @@ function Home() {
             <S.Title>{data?.results[0].title}</S.Title>
             <S.Overview>{data?.results[0].overview}</S.Overview>
           </S.Banner>
+          <Slider />
         </>
       )}
     </S.Wrapper>
