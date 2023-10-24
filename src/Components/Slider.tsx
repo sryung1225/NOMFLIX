@@ -4,11 +4,17 @@ import * as S from "../Styles/SliderStyle";
 
 function Slider() {
   const [index, setIndex] = useState(0);
-  const increaseIndex = () => setIndex((prev) => prev + 1);
+  const [leaving, setLeaving] = useState(false);
+  const increaseIndex = () => {
+    if (leaving) return;
+    toggleLeaving();
+    setIndex((prev) => prev + 1);
+  };
+  const toggleLeaving = () => setLeaving((prev) => !prev);
   return (
     <S.Slider>
       <button onClick={increaseIndex}>슬라이더 작동 테스트</button>
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={toggleLeaving}>
         <S.Row
           variants={S.rowVariants}
           initial="hidden"
