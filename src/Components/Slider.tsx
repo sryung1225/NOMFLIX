@@ -14,7 +14,7 @@ function Slider() {
   return (
     <S.Slider>
       <button onClick={increaseIndex}>슬라이더 작동 테스트</button>
-      <AnimatePresence onExitComplete={toggleLeaving}>
+      <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
         <S.Row
           variants={S.rowVariants}
           initial="hidden"
