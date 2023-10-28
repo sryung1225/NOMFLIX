@@ -16,10 +16,10 @@ function Home() {
       ) : (
         <>
           <S.Banner
-            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}
+            bgPhoto={makeImagePath(data?.results[0]?.backdrop_path || "")}
           >
-            <S.Title>{data?.results[0].title}</S.Title>
-            <S.Overview>{data?.results[0].overview}</S.Overview>
+            <S.Title>{data?.results[0]?.title}</S.Title>
+            <S.Overview>{data?.results[0]?.overview}</S.Overview>
           </S.Banner>
           <Slider />
         </>
