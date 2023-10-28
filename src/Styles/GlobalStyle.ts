@@ -33,11 +33,15 @@ footer, header, hgroup, main, menu, nav, section {
 *[hidden] {
   display: none;
 }
+html {
+  overflow-x: hidden;
+}
 body {
   font-weight: 400;
   font-family: 'Noto Sans KR', sans-serif;
   color: ${(props) => props.theme.white.darker};
   line-height: 1.2;
+  overflow-x: hidden;
 }
 ol, ul {
   list-style: none;
