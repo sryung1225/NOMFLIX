@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import * as S from "../Styles/SliderStyle";
+import { IGetMoviesResult } from "./../api";
 
-function Slider() {
+function Slider({ data }: { data: IGetMoviesResult | undefined }) {
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const increaseIndex = () => {
