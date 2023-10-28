@@ -10,27 +10,26 @@ export const Row = styled(motion.div)`
   position: absolute;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
+  gap: 5px;
   width: 100%;
   margin-bottom: 5px;
   background-color: black;
 `;
 
-export const Box = styled(motion.div)`
+export const Box = styled(motion.div)<{ $bgPhoto: string }>`
   height: 200px;
-  background-color: white;
-  color: red;
-  font-size: 66px;
+  background-image: url(${(props) => props.$bgPhoto});
+  background-size: cover;
 `;
 
 export const rowVariants = {
   hidden: {
-    x: window.outerWidth + 10,
+    x: window.outerWidth + 5,
   },
   visible: {
     x: 0,
   },
   exit: {
-    x: -window.outerWidth - 10,
+    x: -window.outerWidth - 5,
   },
 };

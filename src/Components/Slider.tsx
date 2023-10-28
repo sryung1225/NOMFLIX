@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import * as S from "../Styles/SliderStyle";
 import { IGetMoviesResult } from "./../api";
+import * as S from "../Styles/SliderStyle";
+import { makeImagePath } from "../utils";
 
 function Slider({ data }: { data: IGetMoviesResult | undefined }) {
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
+  const offset = 6;
   const increaseIndex = () => {
-    if (leaving) return;
-    toggleLeaving();
-    setIndex((prev) => prev + 1);
+    if (data) {
+      if (leaving) return;
+      toggleLeaving();
+      const totalMovies = data.results.length - 1;
+      const maxIndex = Math.floor(totalMovies / offset) - 1;
+      setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+    }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
+
   return (
     <S.Slider>
       <button onClick={increaseIndex}>슬라이더 작동 테스트</button>
@@ -24,9 +31,15 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
           transition={{ type: "tween", duration: 1 }}
           key={index}
         >
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <S.Box key={i}>{i}</S.Box>
-          ))}
+          {data?.results
+            ?.slice(1)
+            .slice(offset * index, offset * (index + 1))
+            .map((movie) => (
+              <S.Box
+                key={movie.id}
+                $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+              ></S.Box>
+            ))}
         </S.Row>
       </AnimatePresence>
     </S.Slider>
