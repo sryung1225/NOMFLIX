@@ -12,14 +12,14 @@ export const Loader = styled.div`
   background-color: #000;
 `;
 
-export const Banner = styled.div<{ bgPhoto: string }>`
+export const Banner = styled.div<{ $bgPhoto: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
   padding: 60px;
   background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
-    url(${(props) => props.bgPhoto});
+    url(${(props) => props.$bgPhoto});
   background-size: cover;
 `;
 
