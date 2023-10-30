@@ -36,6 +36,10 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
             .slice(offset * index, offset * (index + 1))
             .map((movie) => (
               <S.Box
+                variants={S.boxVariants}
+                initial="normal"
+                whileHover="hover"
+                transition={{ type: "tween" }}
                 key={movie.id}
                 $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
               ></S.Box>

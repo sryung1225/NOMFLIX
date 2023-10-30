@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background-color: #000;
+  padding-bottom: 200px;
 `;
 
 export const Loader = styled.div`
@@ -21,6 +22,7 @@ export const Banner = styled.div<{ $bgPhoto: string }>`
   background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
     url(${(props) => props.$bgPhoto});
   background-size: cover;
+  background-position: center;
 `;
 
 export const Title = styled.h2`

@@ -20,6 +20,13 @@ export const Box = styled(motion.div)<{ $bgPhoto: string }>`
   height: 200px;
   background-image: url(${(props) => props.$bgPhoto});
   background-size: cover;
+  background-position: center;
+  &:first-child {
+    transform-origin: center left;
+  }
+  &:last-child {
+    transform-origin: center right;
+  }
 `;
 
 export const rowVariants = {
@@ -31,5 +38,19 @@ export const rowVariants = {
   },
   exit: {
     x: -window.outerWidth - 5,
+  },
+};
+
+export const boxVariants = {
+  normal: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.3,
+    y: -50,
+    transition: {
+      delay: 0.3,
+      type: "tween",
+    },
   },
 };
