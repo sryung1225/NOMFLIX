@@ -29,6 +29,19 @@ export const Box = styled(motion.div)<{ $bgPhoto: string }>`
   }
 `;
 
+export const Info = styled(motion.div)`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: ${(props) => props.theme.black.lighter};
+  opacity: 0;
+  h4 {
+    font-size: 18px;
+    text-align: center;
+  }
+`;
+
 export const rowVariants = {
   hidden: {
     x: window.outerWidth + 5,
@@ -47,9 +60,21 @@ export const boxVariants = {
   },
   hover: {
     scale: 1.3,
-    y: -50,
+    y: -80,
     transition: {
-      delay: 0.3,
+      delay: 0.5,
+      duration: 0.1,
+      type: "tween",
+    },
+  },
+};
+
+export const infoVariants = {
+  hover: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      duaration: 0.1,
       type: "tween",
     },
   },

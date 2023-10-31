@@ -42,7 +42,11 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
                 transition={{ type: "tween" }}
                 key={movie.id}
                 $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-              ></S.Box>
+              >
+                <S.Info variants={S.infoVariants}>
+                  <h4>{movie.title}</h4>
+                </S.Info>
+              </S.Box>
             ))}
         </S.Row>
       </AnimatePresence>
