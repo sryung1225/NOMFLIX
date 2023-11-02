@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetMoviesResult } from "./../api";
 import * as S from "../Styles/SliderStyle";
 import { makeImagePath } from "../utils";
 
 function Slider({ data }: { data: IGetMoviesResult | undefined }) {
+  const navigate = useNavigate();
+  const bigMovieMatch = useMatch("/movies/:movieId");
+  console.log(bigMovieMatch);
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const offset = 6;
@@ -18,6 +22,9 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
     }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
+  const onBoxClicked = (movieId: number) => {
+    navigate(`/movies/${movieId}`);
+  };
 
   return (
     <S.Slider>
@@ -42,6 +49,7 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
                 transition={{ type: "tween" }}
                 key={movie.id}
                 $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                onClick={() => onBoxClicked(movie.id)}
               >
                 <S.Info variants={S.infoVariants}>
                   <h4>{movie.title}</h4>
