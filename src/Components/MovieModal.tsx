@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence, useScroll } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import * as S from "../Styles/MovieModalStyle";
 
 interface IMovieModal {
@@ -10,17 +10,17 @@ interface IMovieModal {
 function MovieModal({ isVisible, movieId }: IMovieModal) {
   const navigate = useNavigate();
   const onOverlayClick = () => navigate("/");
-  const { scrollY } = useScroll();
   return (
     <AnimatePresence>
       {isVisible ? (
         <>
           <S.Overlay
             onClick={onOverlayClick}
-            exit={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            variants={S.overlayVariants}
+            animate="visible"
+            exit="exit"
           />
-          <S.BigMovie style={{ top: scrollY.get() + 100 }} layoutId={movieId}>
+          <S.BigMovie layoutId={movieId}>
             hello
             <p>{movieId}</p>
           </S.BigMovie>

@@ -11,10 +11,21 @@ export const Overlay = styled(motion.div)`
 `;
 
 export const BigMovie = styled(motion.div)`
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   width: 40vw;
   height: 80vh;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  margin: auto;
 `;
+
+export const overlayVariants = {
+  visible: {
+    opacity: 0.7,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
