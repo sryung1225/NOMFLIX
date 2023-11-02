@@ -21,6 +21,6 @@ export interface IGetMoviesResult {
 
 export function getMovies() {
   return fetch(
-    `${BASE_PATH}/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR&region=KR`
+    `${BASE_PATH}/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
   ).then((response) => response.json());
 }
