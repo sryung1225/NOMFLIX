@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/RYUNGFLIX/static/js/main.a07a35fa.js",
+    "main.js": "/RYUNGFLIX/static/js/main.0060c2ac.js",
     "index.html": "/RYUNGFLIX/index.html",
-    "main.a07a35fa.js.map": "/RYUNGFLIX/static/js/main.a07a35fa.js.map"
+    "static/media/next.svg": "/RYUNGFLIX/static/media/next.bdd256ac45dbf509dc250981d642e64b.svg",
+    "main.0060c2ac.js.map": "/RYUNGFLIX/static/js/main.0060c2ac.js.map"
   },
   "entrypoints": [
-    "static/js/main.a07a35fa.js"
+    "static/js/main.0060c2ac.js"
   ]
 }
