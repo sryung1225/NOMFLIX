@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/SliderStyle";
+import { ReactComponent as NextSvg } from "../Assets/next.svg";
 
 function Slider({ data }: { data: IGetMoviesResult | undefined }) {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
 
   return (
     <S.Slider>
-      <button onClick={increaseIndex}>슬라이더 작동 테스트</button>
+      <S.Title>Now Playing</S.Title>
       <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
         <S.Row
           variants={S.rowVariants}
@@ -57,6 +58,9 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
             ))}
         </S.Row>
       </AnimatePresence>
+      <S.NextButton onClick={increaseIndex}>
+        <NextSvg />
+      </S.NextButton>
     </S.Slider>
   );
 }

@@ -4,6 +4,16 @@ import styled from "styled-components";
 export const Slider = styled.div`
   position: relative;
   top: -100px;
+  height: 290px;
+  padding: 20px 0;
+`;
+
+export const Title = styled.h2`
+  line-height: 40px;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
 `;
 
 export const Row = styled(motion.div)`
@@ -11,8 +21,8 @@ export const Row = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 5px;
-  width: 100%;
-  margin-bottom: 5px;
+  width: calc(100% - 50px);
+  margin-right: 50px;
   background-color: black;
 `;
 
@@ -43,15 +53,33 @@ export const Info = styled(motion.div)`
   }
 `;
 
+export const NextButton = styled.button`
+  position: absolute;
+  top: 145px;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  margin: auto 0;
+  background-color: transparent;
+  border: 0;
+  svg {
+    fill: #fff;
+    transition: all 0.5s;
+  }
+  &:hover svg {
+    transform: scale(1.4);
+  }
+`;
+
 export const rowVariants = {
   hidden: {
-    x: window.outerWidth + 5,
+    x: window.outerWidth + 55,
   },
   visible: {
     x: 0,
   },
   exit: {
-    x: -window.outerWidth - 5,
+    x: -window.outerWidth - 55,
   },
 };
 
