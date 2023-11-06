@@ -19,6 +19,31 @@ export const BigMovie = styled(motion.div)`
   width: 40vw;
   height: 80vh;
   margin: auto;
+  background-color: ${(props) => props.theme.black.lighter};
+  border-radius: 15px;
+  overflow: hidden;
+`;
+
+export const BigCover = styled.div`
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center center;
+`;
+
+export const BigTitle = styled.h3`
+  position: relative;
+  top: -80px;
+  padding: 20px;
+  color: ${(props) => props.theme.white.lighter};
+  font-size: 46px;
+`;
+
+export const BigOverview = styled.p`
+  position: relative;
+  top: -80px;
+  padding: 20px;
+  color: ${(props) => props.theme.white.lighter};
 `;
 
 export const overlayVariants = {

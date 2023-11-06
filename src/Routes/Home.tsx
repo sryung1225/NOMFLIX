@@ -2,8 +2,8 @@ import { useQuery } from "react-query";
 import { useMatch } from "react-router-dom";
 import { IGetMoviesResult, getMovies } from "../api";
 import { makeImagePath } from "../utils";
-import Slider from "../Components/Slider";
 import * as S from "../Styles/HomeStyle";
+import Slider from "../Components/Slider";
 import MovieModal from "../Components/MovieModal";
 
 function Home() {
@@ -26,6 +26,7 @@ function Home() {
           </S.Banner>
           <Slider data={data} />
           <MovieModal
+            data={data}
             isVisible={!!bigMovieMatch}
             movieId={bigMovieMatch?.params.movieId || ""}
           />

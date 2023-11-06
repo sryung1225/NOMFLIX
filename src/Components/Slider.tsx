@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { IGetMoviesResult } from "./../api";
-import * as S from "../Styles/SliderStyle";
+import { IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
+import * as S from "../Styles/SliderStyle";
 
 function Slider({ data }: { data: IGetMoviesResult | undefined }) {
   const navigate = useNavigate();

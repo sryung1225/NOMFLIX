@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link, useMatch } from "react-router-dom";
-import * as S from "../Styles/HeaderStyle";
 import {
   motion,
   useAnimation,
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
+import * as S from "../Styles/HeaderStyle";
 
 function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
