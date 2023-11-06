@@ -19,8 +19,30 @@ export interface IGetMoviesResult {
   total_results: number;
 }
 
-export function getMovies() {
+// Movies - NowPlaying
+export function getNowPlayingMovies() {
   return fetch(
     `${BASE_PATH}/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
+  ).then((response) => response.json());
+}
+
+// Movies - Popular
+export function getPopularMovies() {
+  return fetch(
+    `${BASE_PATH}/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
+  ).then((response) => response.json());
+}
+
+// Movies - TopRated
+export function getTopRatedMovies() {
+  return fetch(
+    `${BASE_PATH}/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
+  ).then((response) => response.json());
+}
+
+// Movies - Upcoming
+export function getUpcomingMovies() {
+  return fetch(
+    `${BASE_PATH}/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
   ).then((response) => response.json());
 }
