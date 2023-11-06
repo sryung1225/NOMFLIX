@@ -1,12 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { PathMatch, useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/SliderStyle";
 import { ReactComponent as NextSvg } from "../Assets/next.svg";
+import MovieModal from "./MovieModal";
 
-function Slider({ data }: { data: IGetMoviesResult | undefined }) {
+interface ISlider {
+  data: IGetMoviesResult | undefined;
+  category: string;
+  title: string;
+}
+
+function Slider({ data, category, title }: ISlider) {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -24,44 +31,51 @@ function Slider({ data }: { data: IGetMoviesResult | undefined }) {
   const onBoxClicked = (movieId: number) => {
     navigate(`/movies/${movieId}`);
   };
-
+  const bigMovieMatch: PathMatch<string> | null = useMatch("/movies/:movieId");
   return (
-    <S.Slider>
-      <S.Title>Now Playing</S.Title>
-      <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
-        <S.Row
-          variants={S.rowVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          transition={{ type: "tween", duration: 1 }}
-          key={index}
-        >
-          {data?.results
-            ?.slice(1)
-            .slice(offset * index, offset * (index + 1))
-            .map((movie) => (
-              <S.Box
-                variants={S.boxVariants}
-                initial="normal"
-                whileHover="hover"
-                transition={{ type: "tween" }}
-                key={movie.id}
-                layoutId={movie.id + ""}
-                $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                onClick={() => onBoxClicked(movie.id)}
-              >
-                <S.Info variants={S.infoVariants}>
-                  <h4>{movie.title}</h4>
-                </S.Info>
-              </S.Box>
-            ))}
-        </S.Row>
-      </AnimatePresence>
-      <S.NextButton onClick={increaseIndex}>
-        <NextSvg />
-      </S.NextButton>
-    </S.Slider>
+    <>
+      <S.Slider>
+        <S.Title>{title}</S.Title>
+        <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+          <S.Row
+            variants={S.rowVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{ type: "tween", duration: 1 }}
+            key={index}
+          >
+            {data?.results
+              ?.slice(1)
+              .slice(offset * index, offset * (index + 1))
+              .map((movie) => (
+                <S.Box
+                  variants={S.boxVariants}
+                  initial="normal"
+                  whileHover="hover"
+                  transition={{ type: "tween" }}
+                  key={movie.id}
+                  layoutId={`${category}-${movie.id}`}
+                  $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
+                  onClick={() => onBoxClicked(movie.id)}
+                >
+                  <S.Info variants={S.infoVariants}>
+                    <h4>{movie.title}</h4>
+                  </S.Info>
+                </S.Box>
+              ))}
+          </S.Row>
+        </AnimatePresence>
+        <S.NextButton onClick={increaseIndex}>
+          <NextSvg />
+        </S.NextButton>
+      </S.Slider>
+      {bigMovieMatch ? (
+        <AnimatePresence>
+          <MovieModal id={bigMovieMatch.params.movieId} category={category} />
+        </AnimatePresence>
+      ) : null}
+    </>
   );
 }
 

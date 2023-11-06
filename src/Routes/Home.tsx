@@ -9,7 +9,6 @@ import {
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/HomeStyle";
 import Slider from "../Components/Slider";
-import MovieModal from "../Components/MovieModal";
 
 function Home() {
   const useMultipleQuery = () => {
@@ -22,41 +21,49 @@ function Home() {
       ["topRated"],
       getTopRatedMovies
     );
-    const upComming = useQuery<IGetMoviesResult>(
-      ["upComming"],
+    const upcoming = useQuery<IGetMoviesResult>(
+      ["upcoming"],
       getUpcomingMovies
     );
-    return [nowPlaying, popular, topRated, upComming];
+    return [nowPlaying, popular, topRated, upcoming];
   };
   const [
-    { isLoading: loadingNowPlaying, data: nowPlayingData },
-    { isLoading: loaingPopular, data: popularData },
-    { isLoading: loadingTopRated, data: topRatedData },
-    { isLoading: loaingUpComming, data: upCommingData },
+    { isLoading: nowPlayingLoading, data: nowPlayingMovies },
+    { isLoading: popularLoading, data: popularMovies },
+    { isLoading: topRatedLoading, data: topRatedMovies },
+    { isLoading: upcomingLoading, data: upcomingMovies },
   ] = useMultipleQuery();
 
   return (
     <S.Wrapper>
-      {loadingNowPlaying &&
-      loaingPopular &&
-      loadingTopRated &&
-      loaingUpComming ? (
+      {nowPlayingLoading &&
+      popularLoading &&
+      topRatedLoading &&
+      upcomingLoading ? (
         <S.Loader>Loading...</S.Loader>
       ) : (
         <>
           <S.Banner
             $bgPhoto={makeImagePath(
-              nowPlayingData?.results[0]?.backdrop_path || ""
+              nowPlayingMovies?.results[0]?.backdrop_path || ""
             )}
           >
-            <S.Title>{nowPlayingData?.results[0]?.title}</S.Title>
-            <S.Overview>{nowPlayingData?.results[0]?.overview}</S.Overview>
+            <S.Title>{nowPlayingMovies?.results[0]?.title}</S.Title>
+            <S.Overview>{nowPlayingMovies?.results[0]?.overview}</S.Overview>
           </S.Banner>
-          <Slider data={nowPlayingData} title="지금 재생 중" />
-          <Slider data={popularData} title="명작 영화" />
-          <Slider data={topRatedData} title="실시간 인기 영화" />
-          <Slider data={upCommingData} title="공개 예정" />
-          <MovieModal data={nowPlayingData} />
+
+          <Slider data={popularMovies} category="popular" title="명작 영화" />
+          <Slider
+            data={topRatedMovies}
+            category="topRated"
+            title="실시간 인기 영화"
+          />
+          <Slider data={upcomingMovies} category="upcoming" title="공개 예정" />
+          <Slider
+            data={nowPlayingMovies}
+            category="nowplaying"
+            title="지금 재생 중"
+          />
         </>
       )}
     </S.Wrapper>
