@@ -80,7 +80,7 @@ export const Circle = styled(motion.span)`
   background-color: ${(props) => props.theme.red};
 `;
 
-export const Search = styled.span`
+export const Search = styled.form`
   position: relative;
   display: flex;
   align-items: center;
@@ -95,6 +95,7 @@ export const Input = styled(motion.input)`
   position: absolute;
   right: 0;
   z-index: -1;
+  width: 214px;
   padding: 8px 0 8px 40px;
   background-color: transparent;
   border: 1px solid ${(props) => props.theme.white.lighter};
