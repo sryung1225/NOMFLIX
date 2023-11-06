@@ -1,23 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/MovieModalStyle";
 
-interface IMovieModal {
-  data: IGetMoviesResult | undefined;
-  isVisible: boolean;
-  movieId: string;
-}
-
-function MovieModal({ data, isVisible, movieId }: IMovieModal) {
+function MovieModal({ data }: { data: IGetMoviesResult | undefined }) {
   const navigate = useNavigate();
   const onOverlayClick = () => navigate("/");
+  const bigMovieMatch = useMatch("/movies/:movieId");
   const clickedMovie =
-    movieId && data?.results.find((movie) => movie.id === +movieId);
+    bigMovieMatch?.params.movieId &&
+    data?.results?.find(
+      (movie) => movie.id === Number(bigMovieMatch?.params.movieId)
+    );
   return (
     <AnimatePresence>
-      {isVisible ? (
+      {bigMovieMatch ? (
         <>
           <S.Overlay
             onClick={onOverlayClick}
@@ -25,7 +23,7 @@ function MovieModal({ data, isVisible, movieId }: IMovieModal) {
             animate="visible"
             exit="exit"
           />
-          <S.BigMovie layoutId={movieId}>
+          <S.BigMovie layoutId={bigMovieMatch.params.movieId}>
             {clickedMovie && (
               <>
                 <S.BigCover
