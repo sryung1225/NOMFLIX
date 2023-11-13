@@ -8,6 +8,7 @@ import { makeImagePath } from "../utils";
 import * as S from "../Styles/SliderStyle";
 import { ReactComponent as NextSvg } from "../Assets/next.svg";
 import MovieModal from "./MovieModal";
+import TvModal from "./TvModal";
 
 interface ISlider {
   data: IGetMoviesResult | undefined;
@@ -31,11 +32,16 @@ function Slider({ data, category, title }: ISlider) {
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
   const [clickedCategory, setModalCategory] = useRecoilState(modalCategoryAtom);
-  const onBoxClicked = (movieId: number, category: string) => {
+  const onMovieBoxClicked = (movieId: number, category: string) => {
     setModalCategory(category);
     navigate(`/movies/${movieId}`);
   };
+  const onTvBoxClicked = (tvId: number, category: string) => {
+    setModalCategory(category);
+    navigate(`/series/${tvId}`);
+  };
   const bigMovieMatch: PathMatch<string> | null = useMatch("/movies/:movieId");
+  const bigTvMatch: PathMatch<string> | null = useMatch("/series/:tvId");
 
   return (
     <>
@@ -62,7 +68,7 @@ function Slider({ data, category, title }: ISlider) {
                   key={movie.id}
                   layoutId={`${category}-${movie.id}`}
                   $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                  onClick={() => onBoxClicked(movie.id, category)}
+                  onClick={() => onMovieBoxClicked(movie.id, category)}
                 >
                   <S.Info variants={S.infoVariants}>
                     <h4>{movie.title}</h4>
@@ -81,6 +87,11 @@ function Slider({ data, category, title }: ISlider) {
             id={bigMovieMatch.params.movieId}
             category={clickedCategory}
           />
+        </AnimatePresence>
+      ) : null}
+      {bigTvMatch ? (
+        <AnimatePresence>
+          <TvModal id={bigTvMatch.params.movieId} category={clickedCategory} />
         </AnimatePresence>
       ) : null}
     </>

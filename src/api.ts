@@ -72,3 +72,61 @@ export function getMovieDetail(movieId: string | undefined) {
     `${BASE_PATH}/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
   ).then((response) => response.json());
 }
+
+interface ITv {
+  id: number;
+  backdrop_path: string;
+  poster_path: string;
+  title: string;
+  overview: string;
+}
+
+export interface IGetTvResult {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+  page: number;
+  results: ITv[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface IGetTvDetail {
+  backdrop_path: string;
+  genres: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+  id: number;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  title: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+// TV - Latest
+
+// TV - Airing Today
+export function getAiringTodayTv() {
+  return fetch(
+    `${BASE_PATH}/tv/airing_today?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
+  ).then((response) => response.json());
+}
+
+// TV - Popular
+
+// TV - TopRated
+
+// TV Detail
+export function getTvDetail(tvId: string | undefined) {
+  return fetch(
+    `${BASE_PATH}/tv/${tvId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ko-KR`
+  ).then((response) => response.json());
+}
