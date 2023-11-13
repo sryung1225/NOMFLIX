@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { PathMatch, useMatch, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { AnimatePresence } from "framer-motion";
+import { modalCategoryAtom } from "../atom";
 import { IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/SliderStyle";
@@ -28,10 +30,13 @@ function Slider({ data, category, title }: ISlider) {
     }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
-  const onBoxClicked = (movieId: number) => {
+  const [clickedCategory, setModalCategory] = useRecoilState(modalCategoryAtom);
+  const onBoxClicked = (movieId: number, category: string) => {
+    setModalCategory(category);
     navigate(`/movies/${movieId}`);
   };
   const bigMovieMatch: PathMatch<string> | null = useMatch("/movies/:movieId");
+
   return (
     <>
       <S.Slider>
@@ -57,7 +62,7 @@ function Slider({ data, category, title }: ISlider) {
                   key={movie.id}
                   layoutId={`${category}-${movie.id}`}
                   $bgPhoto={makeImagePath(movie.backdrop_path, "w500")}
-                  onClick={() => onBoxClicked(movie.id)}
+                  onClick={() => onBoxClicked(movie.id, category)}
                 >
                   <S.Info variants={S.infoVariants}>
                     <h4>{movie.title}</h4>
@@ -72,7 +77,10 @@ function Slider({ data, category, title }: ISlider) {
       </S.Slider>
       {bigMovieMatch ? (
         <AnimatePresence>
-          <MovieModal id={bigMovieMatch.params.movieId} category={category} />
+          <MovieModal
+            id={bigMovieMatch.params.movieId}
+            category={clickedCategory}
+          />
         </AnimatePresence>
       ) : null}
     </>
