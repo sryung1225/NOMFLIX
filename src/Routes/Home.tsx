@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   IGetMoviesResult,
   getNowPlayingMovies,
@@ -12,19 +12,22 @@ import Slider from "../Components/Slider";
 
 function Home() {
   const useMultipleQuery = () => {
-    const nowPlaying = useQuery<IGetMoviesResult>(
-      ["nowPlaying"],
-      getNowPlayingMovies
-    );
-    const popular = useQuery<IGetMoviesResult>(["popular"], getPopularMovies);
-    const topRated = useQuery<IGetMoviesResult>(
-      ["topRated"],
-      getTopRatedMovies
-    );
-    const upcoming = useQuery<IGetMoviesResult>(
-      ["upcoming"],
-      getUpcomingMovies
-    );
+    const nowPlaying = useQuery<IGetMoviesResult>({
+      queryKey: ["nowPlaying"],
+      queryFn: getNowPlayingMovies,
+    });
+    const popular = useQuery<IGetMoviesResult>({
+      queryKey: ["popular"],
+      queryFn: getPopularMovies,
+    });
+    const topRated = useQuery<IGetMoviesResult>({
+      queryKey: ["topRated"],
+      queryFn: getTopRatedMovies,
+    });
+    const upcoming = useQuery<IGetMoviesResult>({
+      queryKey: ["upcoming"],
+      queryFn: getUpcomingMovies,
+    });
     return [nowPlaying, popular, topRated, upcoming];
   };
   const [

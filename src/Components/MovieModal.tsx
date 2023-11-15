@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { IGetMovieDetail, getMovieDetail } from "../api";
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/MovieModalStyle";
-import { useQuery } from "react-query";
 
 interface IMovieModal {
   id?: string;
@@ -12,9 +12,10 @@ interface IMovieModal {
 function MovieModal({ id, category }: IMovieModal) {
   const navigate = useNavigate();
   const onOverlayClick = () => navigate("/");
-  const { data: detailData } = useQuery<IGetMovieDetail>(["movie", id], () =>
-    getMovieDetail(id)
-  );
+  const { data: detailData } = useQuery<IGetMovieDetail>({
+    queryKey: ["movie", id],
+    queryFn: () => getMovieDetail(id),
+  });
   return (
     <>
       <S.Overlay

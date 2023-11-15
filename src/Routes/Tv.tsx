@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { IGetMoviesResult, getAiringTodayTv } from "../api";
 import { makeImagePath } from "../utils";
 import * as S from "../Styles/HomeStyle";
@@ -6,10 +6,10 @@ import Slider from "../Components/Slider";
 
 function Tv() {
   const useMultipleQuery = () => {
-    const airingToday = useQuery<IGetMoviesResult>(
-      ["airingToday"],
-      getAiringTodayTv
-    );
+    const airingToday = useQuery<IGetMoviesResult>({
+      queryKey: ["airingToday"],
+      queryFn: getAiringTodayTv,
+    });
     return [airingToday];
   };
   const [{ isLoading: airingTodayLoading, data: airingTodayTv }] =
